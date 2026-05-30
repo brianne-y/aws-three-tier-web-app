@@ -179,10 +179,11 @@ data "aws_ami" "amazon_linux_2023" {
 # EC2 Instance
 resource "aws_instance" "wordpress" {
   ami                    = data.aws_ami.amazon_linux_2023.id
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_1.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   key_name               = var.key_pair_name
+  associate_public_ip_address = true
 
   user_data = <<-EOF
               #!/bin/bash
