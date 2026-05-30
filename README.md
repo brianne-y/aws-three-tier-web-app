@@ -108,7 +108,15 @@ terraform plan validated 23 resources to be created across the full stack. Runni
 
 ![Security Groups](screenshots/security-groups.png)
 
-**EC2 and ALB** — I deployed the EC2 instance using the latest Amazon Linux 2023 AMI with a user_data script designed to install Apache, PHP, and WordPress automatically on first boot. The ALB was deployed across both public subnets with a target group that performs health checks before routing any traffic.
+**EC2 and ALB** — I deployed the EC2 instance using the latest Amazon Linux 2023 AMI with a user_data script that runs on first boot to install Apache, PHP, and WordPress automatically:
+
+```bash
+yum install -y httpd php php-mysqlnd
+systemctl start httpd
+systemctl enable httpd
+```
+
+The ALB was deployed across both public subnets with a target group that performs health checks before routing any traffic.
 
 ![EC2 Running](screenshots/ec2-running.png)
 
