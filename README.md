@@ -246,6 +246,8 @@ When you are done testing and exploring this project, clean up your AWS resource
 4. CloudWatch → Alarms → confirm all alarms were removed by terraform destroy
 5. SNS → Topics → confirm topic was removed by terraform destroy
 
+![Terraform Destroy Complete](screenshots/terraform-destroy-complete.png)
+
 All EC2, RDS, ALB, VPC, and security group resources are removed automatically by terraform destroy.
 
 ---
