@@ -96,6 +96,8 @@ With all five files written and the S3 backend in place, I ran terraform init to
 
 terraform plan validated 23 resources to be created across the full stack. Running terraform apply provisioned everything: VPC, subnets, internet gateway, route tables, security groups, EC2, ALB, target group, RDS, CloudWatch alarms, and SNS topic.
 
+![Terraform Plan 23 Resources](screenshots/terraform-plan-23-resources.png)
+
 ![Terraform Apply Complete](screenshots/terraform-apply-complete.png)
 
 **VPC and Networking** — I built a VPC with CIDR 10.0.0.0/16 and four subnets across two availability zones. Two public subnets host the ALB and EC2. Two private subnets host RDS. Four subnets are required because AWS mandates that both the ALB and RDS span at least two availability zones for redundancy.
@@ -124,7 +126,15 @@ terraform plan validated 23 resources to be created across the full stack. Runni
 
 In a real migration, data gets exported from the source server before the destination infrastructure is even provisioned. I created a sample SQL export file locally on my Mac to simulate that sequence: export first, then provision, then import.
 
-The file was transferred to EC2 using SCP (Secure Copy Protocol), which uses the same key pair authentication as SSH. From inside the EC2 instance, I connected directly to the RDS endpoint using the MySQL client and ran the import, proving that EC2 can reach RDS through the security group chain and that the database is active and accepting connections.
+![Sample SQL Export File](screenshots/sample-sql-file-DB.png)
+
+The file was transferred to EC2 using SCP (Secure Copy Protocol), which uses the same key pair authentication as SSH. From inside the EC2 instance, I connected directly to the RDS endpoint using the MySQL client, proving that EC2 can reach RDS through the security group chain.
+
+![EC2 Connected to RDS](screenshots/ec2-connected-to-rds.png)
+
+The import was then executed against the live RDS database confirming the database was active and accepting connections.
+
+![Database Import Running](screenshots/database-import-running.png)
 
 ---
 
