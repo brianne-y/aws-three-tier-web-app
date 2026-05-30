@@ -78,6 +78,7 @@ Here is what each file does and why it exists:
 Before running terraform init, I created the S3 bucket that stores Terraform state remotely. This has to be done manually because Terraform cannot create the bucket it needs to store its own state. It is a dependency that has to exist first.
 
 Versioning was enabled on the bucket so previous state versions can be recovered if something gets corrupted.
+![S3 Bucket Created via CLI](screenshots/s3-bucket-creation-cli.png)
 
 ![S3 Bucket with Versioning](screenshots/s3-bucket-versioning.png)
 
